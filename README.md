@@ -1,4 +1,4 @@
-# Tamil Font Library 🔤
+# Font Aruvi 🔤
 
 > Browse, preview, and download 1500+ Tamil fonts — hosted on Netlify.
 
@@ -47,7 +47,7 @@ python3 -m http.server 8080
 ```bash
 git init
 git add .
-git commit -m "Initial Tamil Font Library"
+git commit -m "Initial Font Aruvi"
 # Push to GitHub, then connect repo to Netlify
 ```
 

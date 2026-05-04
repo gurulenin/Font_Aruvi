@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>தமிழ் எழுத்துரு நூலகம் — Tamil Font Library</title>
+  <title>Font Aruvi — தமிழ் எழுத்துரு அருவி</title>
   <meta name="description" content="Browse, preview and download 1500+ Tamil fonts. Search by name, filter by category and license, preview with custom text."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <script>
+    const theme = localStorage.getItem('theme') || 'dark';
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  </script>
 </head>
 <body>
 
@@ -15,7 +19,7 @@
 <header class="topbar">
   <a href="/" class="brand">
     <div class="brand-icon">த</div>
-    <span class="brand-name">Tamil<span>Fonts</span></span>
+    <span class="brand-name">Font<span>Aruvi</span></span>
   </a>
 
   <div class="search-wrap">
@@ -24,6 +28,7 @@
   </div>
 
   <div class="topbar-actions">
+    <button class="btn btn-ghost btn-icon" id="themeToggleBtn" title="Toggle Theme">☀️</button>
     <button class="btn btn-ghost btn-icon" id="sidebarToggle" title="Filters" style="display:none">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
     </button>

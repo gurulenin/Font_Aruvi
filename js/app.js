@@ -317,6 +317,25 @@ function showToast(msg) {
 
 /* ── Controls setup ── */
 function setupControls() {
+  // Theme Toggle
+  const themeBtn = document.getElementById('themeToggleBtn');
+  if (themeBtn) {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    themeBtn.textContent = isLight ? '🌙' : '☀️';
+    themeBtn.addEventListener('click', () => {
+      const isNowLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isNowLight) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.textContent = '☀️';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeBtn.textContent = '🌙';
+      }
+    });
+  }
+
   // Search
   document.getElementById('searchInput').addEventListener('input', e => {
     filters.search = e.target.value;

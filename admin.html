@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin — Tamil Font Library</title>
+  <title>Admin — Font Aruvi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <script>
+    const theme = localStorage.getItem('theme') || 'dark';
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  </script>
 </head>
 <body>
 
@@ -26,9 +30,10 @@
 <header class="topbar">
   <a href="index.html" class="brand">
     <div class="brand-icon">த</div>
-    <span class="brand-name">Tamil<span>Fonts</span> <span style="color:var(--text3);font-size:13px;font-weight:400">Admin</span></span>
+    <span class="brand-name">Font<span>Aruvi</span> <span style="color:var(--text3);font-size:13px;font-weight:400">Admin</span></span>
   </a>
   <div class="topbar-actions" style="margin-left:auto">
+    <button class="btn btn-ghost btn-icon" id="themeToggleBtn" title="Toggle Theme">☀️</button>
     <button class="btn btn-accent" id="exportBtn">⬇ Export fonts.json</button>
     <a href="index.html" class="btn btn-ghost">← Back to Site</a>
   </div>

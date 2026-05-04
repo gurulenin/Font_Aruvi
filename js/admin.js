@@ -207,6 +207,25 @@ function csvEsc(v) {
 
 // ── Controls ────────────────────────────────────────────────────
 function setupAdminControls() {
+  // Theme Toggle
+  const themeBtn = document.getElementById('themeToggleBtn');
+  if (themeBtn) {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    themeBtn.textContent = isLight ? '🌙' : '☀️';
+    themeBtn.addEventListener('click', () => {
+      const isNowLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isNowLight) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.textContent = '☀️';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeBtn.textContent = '🌙';
+      }
+    });
+  }
+
   // CSV upload zone
   const zone = document.getElementById('csvZone');
   const fileInput = document.getElementById('csvFileInput');
