@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>தமிழ் எழுத்துரு நூலகம் — Tamil Font Library</title>
+  <meta name="description" content="Browse, preview and download 1500+ Tamil fonts. Search by name, filter by category and license, preview with custom text."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ── Topbar ── -->
+<header class="topbar">
+  <a href="/" class="brand">
+    <div class="brand-icon">த</div>
+    <span class="brand-name">Tamil<span>Fonts</span></span>
+  </a>
+
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="searchInput" type="search" placeholder="Search fonts by name, designer, tags…" autocomplete="off"/>
+  </div>
+
+  <div class="topbar-actions">
+    <button class="btn btn-ghost btn-icon" id="sidebarToggle" title="Filters" style="display:none">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+    </button>
+    <a href="admin.html" class="btn btn-ghost" style="font-size:13px">⚙ Admin</a>
+  </div>
+</header>
+
+<!-- ── App Layout ── -->
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- Preview Text -->
+    <div class="filter-section preview-section">
+      <div class="filter-label">Preview Text</div>
+      <div class="preview-text-wrap">
+        <textarea id="previewTextInput" placeholder="Type Tamil text…">தமிழ் மொழி உலகின் பழமையான மொழிகளில் ஒன்றாகும்.</textarea>
+      </div>
+      <div class="mode-btns">
+        <button class="mode-btn" data-mode="custom">Custom</button>
+        <button class="mode-btn active" data-mode="sentence">Sentence</button>
+        <button class="mode-btn" data-mode="alphabet">Alphabet</button>
+        <button class="mode-btn" data-mode="paragraph">Paragraph</button>
+        <button class="mode-btn" data-mode="numerals">Numerals</button>
+      </div>
+      <div class="size-row">
+        <span class="size-label">Size</span>
+        <input id="sizeSlider" type="range" min="12" max="96" value="28" style="--pct:18%"/>
+        <span id="sizeValue">28px</span>
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div class="filter-section">
+      <div class="filter-label">Category</div>
+      <div class="filter-chip-group">
+        <button class="filter-chip active" data-cat="">All</button>
+        <button class="filter-chip" data-cat="Serif">Serif</button>
+        <button class="filter-chip" data-cat="Sans-Serif">Sans-Serif</button>
+        <button class="filter-chip" data-cat="Display">Display</button>
+        <button class="filter-chip" data-cat="Handwritten">Handwritten</button>
+        <button class="filter-chip" data-cat="Monospace">Monospace</button>
+        <button class="filter-chip" data-cat="Other">Other</button>
+      </div>
+    </div>
+
+    <!-- License -->
+    <div class="filter-section">
+      <div class="filter-label">License</div>
+      <div class="filter-chip-group">
+        <button class="filter-chip active" data-lic="">All</button>
+        <button class="filter-chip" data-lic="OFL">OFL / Open</button>
+        <button class="filter-chip" data-lic="Free">Free</button>
+        <button class="filter-chip" data-lic="Proprietary">Proprietary</button>
+        <button class="filter-chip" data-lic="Unknown">Unknown</button>
+      </div>
+    </div>
+
+    <!-- Collection — dynamically populated by app.js -->
+    <div class="filter-section" id="collectionSection" style="display:none">
+      <div class="filter-label" style="display:flex;align-items:center;justify-content:space-between">
+        <span>Collection</span>
+        <span id="collectionCount" style="font-size:10px;color:var(--text3)"></span>
+      </div>
+      <div class="filter-chip-group" id="collectionChips"></div>
+    </div>
+
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+    <div class="toolbar">
+      <span class="font-count">Showing <strong id="fontCount">…</strong> of <strong id="totalCount">…</strong> fonts</span>
+      <div class="toolbar-right">
+        <select id="sortSelect" class="sort-select">
+          <option value="name">Sort: Name A–Z</option>
+          <option value="newest">Sort: Newest</option>
+          <option value="category">Sort: Category</option>
+        </select>
+        <button class="btn btn-ghost btn-icon active" id="gridViewBtn" title="Grid view">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </button>
+        <button class="btn btn-ghost btn-icon" id="listViewBtn" title="List view">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="fontsGrid"></div>
+    <div id="pagination" class="pagination" style="margin-top:32px"></div>
+  </main>
+</div>
+
+<!-- ── Font Detail Modal ── -->
+<div class="modal-overlay" id="fontModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-subtitle" id="modalSubtitle"></div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-preview-controls">
+        <input id="modalPreviewText" type="text" placeholder="Type preview text…"/>
+        <input id="modalSizeSlider" type="range" min="16" max="120" value="48"/>
+        <span id="modalSizeValue" style="font-size:12px;color:var(--accent);min-width:36px">48px</span>
+      </div>
+      <div class="modal-preview-box" id="modalPreviewBox" style="font-size:48px"></div>
+      <div class="meta-grid" id="modalMeta"></div>
+
+      <!-- Tamil Glyph Chart -->
+      <div class="glyph-section">
+        <div class="glyph-title">Vowels — உயிரெழுத்துக்கள்</div>
+        <div class="glyph-grid" id="vowelGlyphs"></div>
+        <div class="glyph-title" style="margin-top:16px">Consonants — மெய்யெழுத்துக்கள்</div>
+        <div class="glyph-grid" id="consonantGlyphs"></div>
+        <div class="glyph-title" style="margin-top:16px">Tamil Numerals — தமிழ் இலக்கங்கள்</div>
+        <div class="glyph-grid" id="numeralGlyphs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="modalClose2" onclick="closeModal()">Close</button>
+      <button class="btn btn-accent" id="modalDownloadBtn">⬇ Download Font</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast ── -->
+<div id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
